@@ -14,7 +14,7 @@ npm install graphology-layout
 
 ### #.random
 
-Random layout positionning every node by choosing each coordinates uniformly at random on the interval [0, 1).
+Random layout positionning every node by choosing each coordinates uniformly at random on the interval `[0, 1)`.
 
 *Example*
 
