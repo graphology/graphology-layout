@@ -4,6 +4,7 @@
   "description": "Collection of basic layout algorithms for graphology.",
   "main": "index.js",
   "files": [
+    "circular.js",
     "index.js",
     "random.js"
   ],

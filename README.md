@@ -10,7 +10,38 @@ npm install graphology-layout
 
 ## Usage
 
+* [circular](#circular)
 * [random](#random)
+
+### #.circular
+
+Arranges the node in a circle.
+
+*Example*
+
+```js
+import {circular} from 'graphology-layout';
+// Alternatively, to load only the relevant code:
+import circular from 'graphology-layout/circular';
+
+const positions = circular(Graph);
+
+// With options:
+const positions = circular(Graph, {scale: 100});
+
+// To directly assign the positions to the nodes:
+circular.assign(Graph);
+```
+
+*Arguments*
+
+* **graph** *Graph*: target graph.
+* **options** *?object*: options:
+  - **attributes** *?object*: attributes to map:
+    + **x** *?string* [`x`]: name of the x position.
+    + **y** *?string* [`y`]: name of the y position.
+  - **center** *?number* [`0.5`]: center of the layout.
+  - **scale** *?number* [`1`]: scale of the layout.
 
 ### #.random
 
