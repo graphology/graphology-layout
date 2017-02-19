@@ -7,6 +7,10 @@ var assert = require('assert'),
     Graph = require('graphology'),
     random = require('./random.js');
 
+var rng = function() {
+  return seedrandom('test');
+};
+
 describe('graphology-layout', function() {
 
   describe('random', function() {
@@ -21,7 +25,7 @@ describe('graphology-layout', function() {
       var graph = new Graph();
       graph.addNodesFrom([1, 2, 3, 4]);
 
-      var positions = random(graph, {rng: seedrandom('test')});
+      var positions = random(graph, {rng: rng()});
 
       assert.deepEqual(
         positions,
@@ -40,7 +44,7 @@ describe('graphology-layout', function() {
 
       var get = graph.getNodeAttributes.bind(graph);
 
-      random.assign(graph, {rng: seedrandom('test')});
+      random.assign(graph, {rng: rng()});
 
       assert.deepEqual(
         {1: get(1), 2: get(2), 3: get(3), 4: get(4)},
@@ -59,7 +63,7 @@ describe('graphology-layout', function() {
 
       var get = graph.getNodeAttributes.bind(graph);
 
-      random.assign(graph, {rng: seedrandom('test'), attributes: {x: 'X', y: 'Y'}});
+      random.assign(graph, {rng: rng(), attributes: {x: 'X', y: 'Y'}});
 
       assert.deepEqual(
         {1: get(1), 2: get(2), 3: get(3), 4: get(4)},
@@ -76,7 +80,7 @@ describe('graphology-layout', function() {
       var graph = new Graph();
       graph.addNodesFrom([1, 2, 3, 4]);
 
-      var positions = random(graph, {rng: seedrandom('test'), center: 0.7});
+      var positions = random(graph, {rng: rng(), center: 0.7});
 
       assert.deepEqual(
         positions,
@@ -93,7 +97,7 @@ describe('graphology-layout', function() {
       var graph = new Graph();
       graph.addNodesFrom([1, 2, 3, 4]);
 
-      var positions = random(graph, {rng: seedrandom('test'), scale: 3});
+      var positions = random(graph, {rng: rng(), scale: 3});
 
       assert.deepEqual(
         positions,
