@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/graphology/graphology-layout.svg)](https://travis-ci.org/graphology/graphology-layout)
+
 # Graphology Layout
 
 Collection of basic layout algorithms to be used with [`graphology`](https://graphology.github.io).
