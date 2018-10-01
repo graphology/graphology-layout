@@ -23,7 +23,9 @@ describe('graphology-layout', function() {
 
     it('should correctly produce a layout.', function() {
       var graph = new Graph();
-      graph.addNodesFrom([1, 2, 3, 4]);
+      [1, 2, 3, 4].forEach(function(node) {
+        graph.addNode(node);
+      });
 
       var positions = random(graph, {rng: rng()});
 
@@ -40,7 +42,9 @@ describe('graphology-layout', function() {
 
     it('should be possible to assign the results to the nodes.', function() {
       var graph = new Graph();
-      graph.addNodesFrom([1, 2, 3, 4]);
+      [1, 2, 3, 4].forEach(function(node) {
+        graph.addNode(node);
+      });
 
       var get = graph.getNodeAttributes.bind(graph);
 
@@ -59,7 +63,9 @@ describe('graphology-layout', function() {
 
     it('should be possible to map to the desired attributes.', function() {
       var graph = new Graph();
-      graph.addNodesFrom([1, 2, 3, 4]);
+      [1, 2, 3, 4].forEach(function(node) {
+        graph.addNode(node);
+      });
 
       var get = graph.getNodeAttributes.bind(graph);
 
@@ -78,7 +84,9 @@ describe('graphology-layout', function() {
 
     it('should be possible to offset the center.', function() {
       var graph = new Graph();
-      graph.addNodesFrom([1, 2, 3, 4]);
+      [1, 2, 3, 4].forEach(function(node) {
+        graph.addNode(node);
+      });
 
       var positions = random(graph, {rng: rng(), center: 0.7});
 
@@ -95,7 +103,9 @@ describe('graphology-layout', function() {
 
     it('should be possible to scale the layout.', function() {
       var graph = new Graph();
-      graph.addNodesFrom([1, 2, 3, 4]);
+      [1, 2, 3, 4].forEach(function(node) {
+        graph.addNode(node);
+      });
 
       var positions = random(graph, {rng: rng(), scale: 3});
 
