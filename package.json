@@ -4,6 +4,7 @@
   "description": "Collection of basic layout algorithms for graphology.",
   "main": "index.js",
   "files": [
+    "*.d.ts",
     "circular.js",
     "index.js",
     "random.js"
@@ -44,6 +45,7 @@
     "extends": "@yomguithereal/eslint-config"
   },
   "dependencies": {
+    "graphology-types": "^0.15.3",
     "graphology-utils": "^1.6.0",
     "lodash": "^4.17.15"
   }
