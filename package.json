@@ -1,18 +1,20 @@
 {
   "name": "graphology-layout",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Collection of basic layout algorithms for graphology.",
   "main": "index.js",
   "files": [
     "*.d.ts",
     "circular.js",
     "index.js",
-    "random.js"
+    "random.js",
+    "circlepack.js"
   ],
   "scripts": {
     "lint": "eslint *.js",
     "prepublish": "npm run lint && npm test",
-    "test": "mocha test.js"
+    "test": "mocha test.js",
+    "test-circlepack": "mocha test-circlepack.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
     "graphology",
     "layout",
     "random",
-    "circular"
+    "circular",
+    "circlepack"
   ],
   "author": {
     "name": "Guillaume Plique",
