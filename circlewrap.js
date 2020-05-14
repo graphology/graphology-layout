@@ -4,7 +4,7 @@
  *
  * Helper class, ported from CirclePackLayout gephi plugin
  */
-var assert = require('assert');
+
 class CircleWrap {
     wrappedCircle;//hacky d3 reference thing
 
@@ -29,7 +29,9 @@ class CircleWrap {
     }
 
     static fromValues(x, y, r) {
-        assert(r >= 0);
+        if (r < 0)
+            throw new Error('graphology-layout/circlewrap: r cannot be < 0.');
+
         let ret = new CircleWrap();
         ret.x = x;
         ret.y = y;
