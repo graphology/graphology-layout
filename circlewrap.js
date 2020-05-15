@@ -40,10 +40,11 @@ CircleWrap.prototype.getChild = function(id) {
 
 CircleWrap.prototype.applyPositionToChildren = function() {
     if (this.hasChildren()) {
-        Object.keys(this.children).forEach(function(key) {
-            var child = this.children[key];
-            child.x += this.x;
-            child.y += this.y;
+        var root = this; // using 'this' in Object.keys.forEach seems a bad idea
+        Object.keys(root.children).forEach(function(key) {
+            var child = root.children[key];
+            child.x += root.x;
+            child.y += root.y;
             child.applyPositionToChildren();
         });
     }
