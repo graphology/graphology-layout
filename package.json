@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint *.js",
     "prepublish": "npm run lint && npm test",
-    "test": "mocha test.js",
+    "test": "mocha test.js test-circlepack.js",
     "test-circlepack": "mocha test-circlepack.js"
   },
   "repository": {
