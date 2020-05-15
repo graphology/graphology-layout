@@ -48,14 +48,14 @@ function genericCirclePackLayout(assign, graph, options) {
         scale = options.scale;
 
     var container = new CircleWrap();
-    //container.addChild('test', new CircleWrap());
+
     graph.forEachNode(function(key, attributes) {
         var nodeAttr = [];
         var newCircleWrap = new CircleWrap(key, null, null, attributes.size || 1);
         var parentContainer = container;
 
         hierarchyAttributes.forEach(function(v) {
-            nodeAttr.push(attributes[v]);
+            nodeAttr.push(v + '=' + attributes[v]);
         });
         nodeAttr.forEach(function(v) {
             parentContainer = parentContainer.getChild(v);
