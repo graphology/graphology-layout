@@ -1,5 +1,7 @@
 import Graph from 'graphology-types';
 
+type RNGFunction =  () => number;
+
 export type CirclePackLayoutOptions = {
     attributes: {
         x: string,
@@ -7,6 +9,7 @@ export type CirclePackLayoutOptions = {
     },
     center: number,
     hierarchyAttributes: string[],
+    rng: RNGFunction,
     scale: number
 };
 

@@ -19,13 +19,13 @@ function setNode(/*Graph*/ graph, /*CircleWrap*/ parentCircle, /*Map*/posMap) {
     });
 }
 
-function shuffle(array) {
+function shuffle(array, rng) {
     var m = array.length,
         t,
         i;
 
     while (m) {
-        i = Math.random() * m-- | 0;
+        i = rng() * m-- | 0;
         t = array[m];
         array[m] = array[i];
         array[i] = t;
@@ -144,7 +144,7 @@ function score(/*CircleWrap*/ node) {
     return dx * dx + dy * dy;
 }
 
-function enclose(circles) {
+function enclose(circles, rng) {
     var i = 0;
     var circlesLoc = circles.slice();
 
@@ -152,7 +152,7 @@ function enclose(circles) {
     var B = [];
     var p;
     var e;
-    circlesLoc = shuffle(circlesLoc);
+    circlesLoc = shuffle(circlesLoc, rng);
     while (i < n) {
         p = circlesLoc[i];
         if (e && enclosesWeak(e, p)) {
@@ -198,7 +198,7 @@ function intersects(/*CircleWrap*/a, /*CircleWrap*/b) {
     return dr > 0 && dr * dr > dx * dx + dy * dy;
 }
 
-function packEnclose(/*Array<CircleWrap>*/ circles) {
+function packEnclose(/*Array<CircleWrap>*/ circles, rng) {
     var n = circles.length;
     if (n === 0)
         return 0;
@@ -292,7 +292,7 @@ function packEnclose(/*Array<CircleWrap>*/ circles) {
         }
         a.push(c.wrappedCircle);
     }
-    c = enclose(a);
+    c = enclose(a, rng);
 
     // Translate the circles to put the enclosing circle around the origin.
     for (i = 0; i < n; ++i) {
@@ -303,24 +303,24 @@ function packEnclose(/*Array<CircleWrap>*/ circles) {
     return c.r;
 }
 
-function packHierarchy(/*CircleWrap*/ parentCircle) {
+function packHierarchy(/*CircleWrap*/ parentCircle, rng) {
     var r = 0;
     if (parentCircle.hasChildren()) {
         //pack the children first because the radius is determined by how the children get packed (recursive)
         Object.keys(parentCircle.children).forEach(function (key) {
             var circle = parentCircle.children[key];
             if (circle.hasChildren()) {
-                circle.r = packHierarchy(circle);
+                circle.r = packHierarchy(circle, rng);
             }
         });
         //now that each circle has a radius set by its children, pack the circles at this level
-        r = packEnclose(Object.values(parentCircle.children));
+        r = packEnclose(Object.values(parentCircle.children), rng);
     }
     return r;
 }
 
-exports.packHierarchyAndShift = function(/*CircleWrap*/ parentCircle) {
-    packHierarchy(parentCircle);
+exports.packHierarchyAndShift = function(/*CircleWrap*/ parentCircle, rng) {
+    packHierarchy(parentCircle, rng);
     Object.keys(parentCircle.children).forEach(function(key) {
         var circle = parentCircle.children[key];
         circle.applyPositionToChildren();

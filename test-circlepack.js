@@ -2,6 +2,11 @@ var assert = require('chai').assert,
     Graph = require('graphology'),
     circlepack = require('./circlepack.js');
 
+var seedrandom = require('seedrandom');
+
+var rng = function() {
+    return seedrandom('test');
+};
 
 function closeTo(A, B) {
     assert.closeTo(A, B, 1e-6);
@@ -24,7 +29,7 @@ describe('circlepack-layout', function () {
             graph.setNodeAttribute(node, 'size', 10);
         });
 
-        var positions = circlepack(graph, {});
+        var positions = circlepack(graph, {rng: rng()});
         checkPositions(positions, {
             1: {x: -10, y: 0},
             2: {x: 10, y: 0},
@@ -41,7 +46,7 @@ describe('circlepack-layout', function () {
 
         var get = graph.getNodeAttributes.bind(graph);
 
-        circlepack.assign(graph, {});
+        circlepack.assign(graph, {rng: rng()});
 
         checkPositions({1: get(1), 2: get(2), 3: get(3), 4: get(4)},
             {
@@ -58,7 +63,7 @@ describe('circlepack-layout', function () {
             graph.addNode(node);
         });
 
-        var positions = circlepack(graph, {center: 0.7});
+        var positions = circlepack(graph, {center: 0.7, rng: rng()});
 
         checkPositions(positions,
             {
@@ -78,7 +83,7 @@ describe('circlepack-layout', function () {
             graph.setNodeAttribute(node, 'size', (node === 1) ? 30 : 10);
         });
 
-        var positions = circlepack(graph, {hierarchyAttributes: ['degree']});
+        var positions = circlepack(graph, {hierarchyAttributes: ['degree'], rng: rng()});
 
         checkPositions(positions, {
             1: {x: 21.547005383792513, y: 0},
@@ -97,7 +102,7 @@ describe('circlepack-layout', function () {
             graph.setNodeAttribute(node, 'community', (node < 4) ? 0 : 1);
         });
 
-        var positions = circlepack(graph, {hierarchyAttributes: ['community', 'degree']});
+        var positions = circlepack(graph, {hierarchyAttributes: ['community', 'degree'], rng: rng()});
 
         checkPositions(positions, {
             1: {x: -30, y: 0},
@@ -117,7 +122,7 @@ describe('circlepack-layout', function () {
             graph.setNodeAttribute(node, 'size', 10);
         });
 
-        var positions = circlepack(graph, {hierarchyAttributes: ['degree', 'dummy']});
+        var positions = circlepack(graph, {hierarchyAttributes: ['degree', 'dummy'], rng: rng()});
 
         checkPositions(positions,
             {

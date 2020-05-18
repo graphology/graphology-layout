@@ -19,6 +19,7 @@ var DEFAULTS = {
     },
     center: 0,
     hierarchyAttributes: [],
+    rng: Math.random,
     scale: 1
 };
 
@@ -30,7 +31,8 @@ var DEFAULTS = {
  * @param  {object}   [options]               - Options:
  * @param  {object}     [attributes]          - Attributes names to map.
  * @param  {number}     [center]              - Center of the layout.
- * @param  {string[]}   [hierarchyAttributes] - List of attributes used for the layout in decreasing order
+ * @param  {string[]}   [hierarchyAttributes] - List of attributes used for the layout in decreasing order.
+ * @param  {function}   [rng]                 - Custom RNG function to be used.
  * @param  {number}     [scale]               - Scale of the layout.
  * @return {object}                           - The positions by node.
  */
@@ -45,6 +47,7 @@ function genericCirclePackLayout(assign, graph, options) {
         nodes = graph.nodes(),
         center = options.center,
         hierarchyAttributes = options.hierarchyAttributes,
+        rng = options.rng,
         scale = options.scale;
 
     var container = new CircleWrap();
@@ -64,7 +67,7 @@ function genericCirclePackLayout(assign, graph, options) {
         parentContainer.addChild(key, newCircleWrap);
 
     });
-    helpers.packHierarchyAndShift(container);
+    helpers.packHierarchyAndShift(container, rng);
     helpers.setNode(graph, container, posMap);
     var l = nodes.length,
         x,
