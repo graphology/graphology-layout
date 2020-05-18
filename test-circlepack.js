@@ -78,9 +78,9 @@ describe('circlepack-layout', function () {
         assert.deepEqual(
             positions,
             {
-                1: {x: 21.547005383792516, y: 0},
-                2: {x: -40, y: -5.773502691896257},
-                3: {x: -20, y: -5.773502691896257},
+                1: {x: 21.547005383792513, y: 0},
+                2: {x: -40, y: -5.773502691896258},
+                3: {x: -20, y: -5.773502691896258},
                 4: {x: -30, y: 11.547005383792513}
             }
         );
@@ -108,5 +108,22 @@ describe('circlepack-layout', function () {
                 6: {x: 30, y: 0}
             }
         );
+    });
+
+    it('should handle an non-existing attribute.', function() {
+        var graph = new Graph();
+        [1, 2, 3, 4].forEach(function(node) {
+            graph.addNode(node);
+            graph.setNodeAttribute(node, 'size', 10);
+        });
+
+        var positions = circlepack(graph, {hierarchyAttributes: ['degree', 'dummy']});
+        assert.deepEqual(positions,
+            {
+                1: {x: -10, y: 0},
+                2: {x: 10, y: 0},
+                3: {x: 0, y: 17.320508075688772},
+                4: {x: 0, y: -17.320508075688772}
+            });
     });
 });
