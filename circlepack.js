@@ -51,11 +51,12 @@ function genericCirclePackLayout(assign, graph, options) {
 
     graph.forEachNode(function(key, attributes) {
         var nodeAttr = [];
-        var newCircleWrap = new CircleWrap(key, null, null, attributes.size || 1);
+        var r = attributes.size ? attributes.size : 1;
+        var newCircleWrap = new CircleWrap(key, null, null, r);
         var parentContainer = container;
 
         hierarchyAttributes.forEach(function(v) {
-            nodeAttr.push(v + '=' + attributes[v]);
+            nodeAttr.push(attributes[v]);
         });
         nodeAttr.forEach(function(v) {
             parentContainer = parentContainer.getChild(v);

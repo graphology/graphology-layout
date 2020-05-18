@@ -146,7 +146,7 @@ function score(/*CircleWrap*/ node) {
 
 function enclose(circles) {
     var i = 0;
-    var circlesLoc = Array.from(circles);
+    var circlesLoc = circles.slice();
 
     var n = circles.length;
     var B = [];
@@ -246,10 +246,14 @@ function packEnclose(/*Array<CircleWrap>*/ circles) {
             do {
                 if (sj <= sk) {
                     if (intersects(j.wrappedCircle, c.wrappedCircle)) {
-                        b = j; a.next = b; b.previous = a; --i;
+                        b = j;
+                        a.next = b;
+                        b.previous = a;
+                        --i;
                         continue pack;
                     }
-                    sj += j.wrappedCircle.r; j = j.next;
+                    sj += j.wrappedCircle.r;
+                    j = j.next;
                 }
                 else {
                     if (intersects(k.wrappedCircle, c.wrappedCircle)) {
