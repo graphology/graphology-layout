@@ -14,10 +14,10 @@ function closeTo(A, B) {
 
 // Check if positions are close up to the specified precision in closeTo
 function checkPositions(A, B) {
-    Object.keys(A).forEach(function (key) {
+    for (var key in A) {
         closeTo(A[key].x, B[key].x);
         closeTo(A[key].y, B[key].y);
-    });
+    }
 }
 
 describe('circlepack-layout', function () {
