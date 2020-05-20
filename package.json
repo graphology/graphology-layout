@@ -6,6 +6,7 @@
   "files": [
     "*.d.ts",
     "circlepack.js",
+    "circlewrap.js",
     "circular.js",
     "index.js",
     "random.js"
