@@ -20,7 +20,7 @@ function checkPositions(A, B) {
   }
 }
 
-describe('circlepack-layout', function () {
+describe('circlepack', function () {
   it('should correctly produce a layout.', function() {
     var graph = new Graph();
     [1, 2, 3, 4].forEach(function (node) {
