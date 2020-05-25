@@ -39,17 +39,17 @@
   "devDependencies": {
     "@yomguithereal/eslint-config": "^4.0.0",
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
-    "graphology": "^0.15.2",
-    "mocha": "^7.0.1",
+    "eslint": "^7.1.0",
+    "graphology": "^0.17.1",
+    "mocha": "^7.2.0",
     "seedrandom": "^3.0.5"
   },
   "eslintConfig": {
     "extends": "@yomguithereal/eslint-config"
   },
   "dependencies": {
-    "graphology-types": "^0.15.3",
-    "graphology-utils": "^1.6.0",
+    "graphology-types": "^0.16.0",
+    "graphology-utils": "^1.7.0",
     "lodash": "^4.17.15",
     "pandemonium": "^1.5.0"
   }
