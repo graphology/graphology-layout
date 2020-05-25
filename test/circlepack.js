@@ -1,6 +1,6 @@
 var assert = require('chai').assert,
-  Graph = require('graphology'),
-  circlepack = require('./circlepack.js');
+    Graph = require('graphology'),
+    circlepack = require('../circlepack.js');
 
 var seedrandom = require('seedrandom');
 

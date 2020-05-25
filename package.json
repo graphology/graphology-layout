@@ -11,10 +11,9 @@
     "random.js"
   ],
   "scripts": {
-    "lint": "eslint *.js",
+    "lint": "eslint '*.js' test",
     "prepublish": "npm run lint && npm test",
-    "test": "mocha test.js test-circlepack.js",
-    "test-circlepack": "mocha test-circlepack.js"
+    "test": "mocha --recursive test"
   },
   "repository": {
     "type": "git",

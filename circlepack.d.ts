@@ -1,6 +1,6 @@
 import Graph from 'graphology-types';
 
-type RNGFunction =  () => number;
+type RNGFunction = () => number;
 
 export type CirclePackLayoutOptions = {
   attributes: {
