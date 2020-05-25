@@ -12,8 +12,42 @@ npm install graphology-layout
 
 ## Usage
 
+* [circlePack](#circlePack)
 * [circular](#circular)
 * [random](#random)
+
+### #.circlePack
+
+Arranges the nodes as a bubble chart, according to specified attributes.
+
+*Example*
+
+```js
+import {circlepack} from 'graphology-layout';
+// Alternatively, to load only the relevant code:
+import circlepack from 'graphology-layout/circlepack';
+
+const positions = circlepack(Graph);
+
+// With options
+const positions = circlepack(Graph, {hierarchyAttributes: ['degree', 'community'], rng: customRngFunction});
+
+// To directly assign the positions to the nodes:
+circlepack.assign(Graph);
+```
+
+*Arguments*
+
+* **graph** *Graph*: target graph.
+* **options** *?object*: options:
+  - **attributes** *?object*: attributes to map:
+    + **x** *?string* [`x`]: name of the x position.
+    + **y** *?string* [`y`]: name of the y position.
+  - **center** *?number* [`0`]: center of the layout.
+  - **hierarchyAttributes** *?list* [`[]`]: attributes used to group nodes.
+  - **rng** *?function* [`Math.random`]: custom RNG function to use.
+  - **scale** *?number* [`1`]: scale of the layout.
+
 
 ### #.circular
 
@@ -47,7 +81,7 @@ circular.assign(Graph);
 
 ### #.random
 
-Random layout positionning every node by choosing each coordinates uniformly at random on the interval `[0, 1)`.
+Random layout positioning every node by choosing each coordinates uniformly at random on the interval `[0, 1)`.
 
 *Example*
 
@@ -75,3 +109,4 @@ random.assign(Graph);
   - **center** *?number* [`0.5`]: center of the layout.
   - **rng** *?function* [`Math.random`]: custom RNG function to use.
   - **scale** *?number* [`1`]: scale of the layout.
+

@@ -1,10 +1,12 @@
 {
   "name": "graphology-layout",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Collection of basic layout algorithms for graphology.",
   "main": "index.js",
   "files": [
     "*.d.ts",
+    "circlepack.js",
+    "circlewrap.js",
     "circular.js",
     "index.js",
     "random.js"
@@ -12,18 +14,20 @@
   "scripts": {
     "lint": "eslint *.js",
     "prepublish": "npm run lint && npm test",
-    "test": "mocha test.js"
+    "test": "mocha test.js test-circlepack.js",
+    "test-circlepack": "mocha test-circlepack.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/graphology/graphology-layout.git"
   },
   "keywords": [
+    "circlepack",
+    "circular",
     "graph",
     "graphology",
     "layout",
-    "random",
-    "circular"
+    "random"
   ],
   "author": {
     "name": "Guillaume Plique",
@@ -36,6 +40,7 @@
   "homepage": "https://github.com/graphology/graphology-layout#readme",
   "devDependencies": {
     "@yomguithereal/eslint-config": "^4.0.0",
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "graphology": "^0.15.2",
     "mocha": "^7.0.1",
@@ -47,6 +52,7 @@
   "dependencies": {
     "graphology-types": "^0.15.3",
     "graphology-utils": "^1.6.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "pandemonium": "^1.5.0"
   }
 }
