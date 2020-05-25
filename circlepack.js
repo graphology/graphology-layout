@@ -6,7 +6,6 @@
  */
 var defaults = require('lodash/defaultsDeep'),
     isGraph = require('graphology-utils/is-graph'),
-    CircleWrap = require('./circlewrap'),
     shuffle = require('pandemonium/shuffle-in-place');
 
 /**
@@ -23,6 +22,57 @@ var DEFAULTS = {
     scale: 1
 };
 
+/**
+ * Helpers.
+ */
+function CircleWrap(id, x, y, r, circleWrap) {
+    this.wrappedCircle = circleWrap || null;//hacky d3 reference thing
+
+    this.children = {};
+    this.countChildren = 0;
+    this.id = id || null;
+    this.next = null;
+    this.previous = null;
+
+    this.x = x || null;
+    this.y = y || null;
+    if (circleWrap)
+        this.r = 1010101; // for debugging purposes - should not be used in this case
+    else
+        this.r = r || 999;
+
+}
+
+CircleWrap.prototype.hasChildren = function() {
+    return this.countChildren > 0;
+};
+
+CircleWrap.prototype.addChild = function(id, child) {
+    this.children[id] = child;
+    ++this.countChildren;
+};
+
+CircleWrap.prototype.getChild = function(id) {
+    if (!this.children.hasOwnProperty(id)) {
+        var circleWrap = new CircleWrap();
+        this.children[id] = circleWrap;
+        ++this.countChildren;
+    }
+    return this.children[id];
+};
+
+CircleWrap.prototype.applyPositionToChildren = function() {
+    if (this.hasChildren()) {
+        var root = this; // using 'this' in Object.keys.forEach seems a bad idea
+        for (var key in root.children) {
+            var child = root.children[key];
+            child.x += root.x;
+            child.y += root.y;
+            child.applyPositionToChildren();
+        }
+    }
+};
+
 
 function setNode(/*Graph*/ graph, /*CircleWrap*/ parentCircle, /*Map*/posMap) {
     for (var key in parentCircle.children) {
@@ -36,13 +86,13 @@ function setNode(/*Graph*/ graph, /*CircleWrap*/ parentCircle, /*Map*/posMap) {
     }
 }
 
-
 function enclosesNot(/*CircleWrap*/ a, /*CircleWrap*/ b) {
     var dr = a.r - b.r;
     var dx = b.x - a.x;
     var dy = b.y - a.y;
     return dr < 0 || dr * dr < dx * dx + dy * dy;
 }
+
 function enclosesWeak(/*CircleWrap*/a, /*CircleWrap*/ b) {
     var dr = a.r - b.r + 1e-6;
     var dx = b.x - a.x;
@@ -62,6 +112,7 @@ function enclosesWeakAll(/*CircleWrap*/a, /*Array<CircleWrap>*/B) {
 function encloseBasis1(/*CircleWrap*/a) {
     return new CircleWrap(null, a.x, a.y, a.r);
 }
+
 function encloseBasis2(/*CircleWrap*/ a, /*CircleWrap*/ b) {
     var x1 = a.x, y1 = a.y, r1 = a.r,
         x2 = b.x, y2 = b.y, r2 = b.r,
