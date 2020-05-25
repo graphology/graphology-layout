@@ -1,12 +1,12 @@
 /**
  * Graphology CirclePack Layout
- * =========================
+ * =============================
  *
- * Circlepack layout from d3-hierarchy/gephi
+ * Circlepack layout from d3-hierarchy/gephi.
  */
 var defaults = require('lodash/defaultsDeep'),
-  isGraph = require('graphology-utils/is-graph'),
-  shuffle = require('pandemonium/shuffle-in-place');
+    isGraph = require('graphology-utils/is-graph'),
+    shuffle = require('pandemonium/shuffle-in-place');
 
 /**
  * Default options.
@@ -72,7 +72,6 @@ CircleWrap.prototype.applyPositionToChildren = function() {
     }
   }
 };
-
 
 function setNode(/*Graph*/ graph, /*CircleWrap*/ parentCircle, /*Map*/posMap) {
   for (var key in parentCircle.children) {
@@ -287,53 +286,53 @@ function packEnclose(/*Array<CircleWrap>*/ circles, shuffleFunc) {
 
   // Attempt to place each remaining circle…
   pack:
-    for (i = 3; i < n; ++i) {
-      c = circles[i];
-      place(a.wrappedCircle, b.wrappedCircle, c);
-      c = new CircleWrap(null, null, null, null, c);
+  for (i = 3; i < n; ++i) {
+    c = circles[i];
+    place(a.wrappedCircle, b.wrappedCircle, c);
+    c = new CircleWrap(null, null, null, null, c);
 
-      // Find the closest intersecting circle on the front-chain, if any.
-      // “Closeness” is determined by linear distance along the front-chain.
-      // “Ahead” or “behind” is likewise determined by linear distance.
-      j = b.next; k = a.previous; sj = b.wrappedCircle.r; sk = a.wrappedCircle.r;
-      do {
-        if (sj <= sk) {
-          if (intersects(j.wrappedCircle, c.wrappedCircle)) {
-            b = j;
-            a.next = b;
-            b.previous = a;
-            --i;
-            continue pack;
-          }
-          sj += j.wrappedCircle.r;
-          j = j.next;
+    // Find the closest intersecting circle on the front-chain, if any.
+    // “Closeness” is determined by linear distance along the front-chain.
+    // “Ahead” or “behind” is likewise determined by linear distance.
+    j = b.next; k = a.previous; sj = b.wrappedCircle.r; sk = a.wrappedCircle.r;
+    do {
+      if (sj <= sk) {
+        if (intersects(j.wrappedCircle, c.wrappedCircle)) {
+          b = j;
+          a.next = b;
+          b.previous = a;
+          --i;
+          continue pack;
         }
-        else {
-          if (intersects(k.wrappedCircle, c.wrappedCircle)) {
-            a = k;
-            a.next = b;
-            b.previous = a;
-            --i;
-            continue pack;
-          }
-          sk += k.wrappedCircle.r;
-          k = k.previous;
-        }
-      } while (j !== k.next);
-
-      // Success! Insert the new circle c between a and b.
-      c.previous = a; c.next = b; a.next = b.previous = b = c;
-
-      // Compute the new closest circle pair to the centroid.
-      aa = score(a);
-      while ((c = c.next) !== b) {
-        if ((ca = score(c)) < aa) {
-          a = c;
-          aa = ca;
-        }
+        sj += j.wrappedCircle.r;
+        j = j.next;
       }
-      b = a.next;
+      else {
+        if (intersects(k.wrappedCircle, c.wrappedCircle)) {
+          a = k;
+          a.next = b;
+          b.previous = a;
+          --i;
+          continue pack;
+        }
+        sk += k.wrappedCircle.r;
+        k = k.previous;
+      }
+    } while (j !== k.next);
+
+    // Success! Insert the new circle c between a and b.
+    c.previous = a; c.next = b; a.next = b.previous = b = c;
+
+    // Compute the new closest circle pair to the centroid.
+    aa = score(a);
+    while ((c = c.next) !== b) {
+      if ((ca = score(c)) < aa) {
+        a = c;
+        aa = ca;
+      }
     }
+    b = a.next;
+  }
 
   // Compute the enclosing circle of the front chain.
   a = [b.wrappedCircle];
