@@ -39,9 +39,9 @@
   "devDependencies": {
     "@yomguithereal/eslint-config": "^4.0.0",
     "chai": "^4.2.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.3.0",
     "graphology": "^0.17.1",
-    "mocha": "^7.2.0",
+    "mocha": "^8.0.1",
     "seedrandom": "^3.0.5"
   },
   "eslintConfig": {
