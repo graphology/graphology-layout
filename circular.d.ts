@@ -1,12 +1,12 @@
 import Graph from 'graphology-types';
 
 export type CircularLayoutOptions = {
-  attributes: {
+  attributes?: {
     x: string,
     y: string
   },
-  center: number,
-  scale: number
+  center?: number,
+  scale?: number
 };
 
 type LayoutMapping = {[key: string]: {x: number, y: number}};

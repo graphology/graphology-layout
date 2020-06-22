@@ -3,13 +3,13 @@ import Graph from 'graphology-types';
 type RNGFunction = () => number;
 
 export type RandomLayoutOptions = {
-  attributes: {
+  attributes?: {
     x: string,
     y: string
   },
-  center: number,
-  rng: RNGFunction,
-  scale: number
+  center?: number,
+  rng?: RNGFunction,
+  scale?: number
 };
 
 type LayoutMapping = {[key: string]: {x: number, y: number}};
